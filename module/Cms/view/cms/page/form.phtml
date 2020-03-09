@@ -1,0 +1,64 @@
+<div class="row">
+    <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+            <?php echo $this->partial('cms/partial/form_header', ['title' => $title]);?>
+            <?php echo $this->partial('cms/partial/message', ['msgInfo' => $msgInfo]);?>
+
+            <div class="x_content">
+                <br />
+                <?php echo $this->form()->openTag($form);?>
+
+                    <div class="item form-group">
+                        <?php echo $this->formLabel($form->get('ArticleTitle')); ?>
+                        <div class="col-md-6 col-sm-6 ">
+                            <?php echo $this->formElement($form->get('ArticleTitle')); ?>
+                            <?php echo $this->formElementErrors($form->get('ArticleTitle'), array('class' => 'error-message text-danger')); ?>
+                        </div>
+                    </div>
+
+                    <div class="item form-group">
+                        <?php echo $this->formLabel($form->get('ArticleContent')); ?>
+                        <div class="col-md-9 col-sm-9 ">
+                            <?php echo $this->formElement($form->get('ArticleContent')); ?>
+                            <?php echo $this->formElementErrors($form->get('ArticleContent'), array('class' => 'error-message text-danger')); ?>
+                        </div>
+                    </div>
+
+                    <div class="item form-group">
+                        <?php echo $this->formLabel($form->get('ArticleMetaKeyword')); ?>
+                        <div class="col-md-9 col-sm-9 ">
+                            <?php echo $this->formElement($form->get('ArticleMetaKeyword')); ?>
+                            <?php echo $this->formElementErrors($form->get('ArticleMetaKeyword'), array('class' => 'error-message text-danger')); ?>
+                        </div>
+                    </div>
+
+                    <div class="item form-group">
+                        <?php echo $this->formLabel($form->get('ArticleMetaDescription')); ?>
+                        <div class="col-md-9 col-sm-9 ">
+                            <?php echo $this->formElement($form->get('ArticleMetaDescription')); ?>
+                            <?php echo $this->formElementErrors($form->get('ArticleMetaDescription'), array('class' => 'error-message text-danger')); ?>
+                        </div>
+                    </div>
+
+                    <div class="item form-group">
+                        <?php echo $this->formLabel($form->get('ArticleStatus')); ?>
+                        <div class="col-md-6 col-sm-6 ">
+                            <?php echo $this->formElement($form->get('ArticleStatus')); ?>
+                            <?php echo $this->formElementErrors($form->get('ArticleStatus'), array('class' => 'error-message text-danger')); ?>
+                        </div>
+                    </div>
+
+                <?php echo $this->partial('cms/partial/form_button', ['form' => $form, 'backUrl' => $this->url('cms/page')]);?>
+
+                <?php echo $this->form()->closeTag();?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Ckeditor -->
+<script src="<?php echo $this->basePath();?>/ckeditor/ckeditor.js"></script>
+<script src="<?php echo $this->basePath();?>/ckeditor/ckfinder/ckfinder.js"></script>
+<script>
+    var editor = CKEDITOR.replace( 'editor_content' );
+</script>

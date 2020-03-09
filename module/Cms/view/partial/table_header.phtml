@@ -1,0 +1,33 @@
+<div class="x_title">
+    <h2><?php echo $title;?></h2>
+    <ul class="nav navbar-right panel_toolbox">
+        <li><a href="<?php echo $addUrl;?>"><i class="fa fa-plus"></i> Thêm</a></li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+               aria-expanded="false"><i class="fa fa-wrench"></i></a>
+
+            <?php if ($status) {?>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" onclick="deleteRecord()">Xóa</a>
+                <?php foreach($status as $k => $v) {?>
+                    <a class="dropdown-item" onclick="setStatusRecord(<?php echo $k;?>)"><?php echo $v;?></a>
+                <?php }?>
+            </div>
+            <?php }?>
+        </li>
+    </ul>
+    <div class="clearfix"></div>
+</div>
+
+<?php $this->inlineScript()->captureStart();?>
+var urlFormAction = $('#list-form').attr('action');
+function deleteRecord() {
+    $('#list-form').attr('action', urlFormAction + '/delete');
+    $('#list-form').submit();
+}
+
+function setStatusRecord(status) {
+    $('#list-form').attr('action', urlFormAction + '/update-status-record?status=' + status);
+    $('#list-form').submit();
+}
+<?php $this->inlineScript()->captureEnd();?>

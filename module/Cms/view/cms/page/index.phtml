@@ -1,0 +1,73 @@
+<div class="row" style="display: block;">
+    <div class="col-md-12 col-sm-12  ">
+        <div class="x_panel">
+
+            <?php echo $this->partial('cms/partial/table_header', [
+                'addUrl' => $this->url('cms/page', ['action' => 'add']),
+                'status' => $status,
+                'title' => $title,
+            ]); ?>
+
+            <div class="x_content">
+
+                <?php echo $this->partial('cms/partial/message', ['msgInfo' => $msgInfo]); ?>
+
+                <div class="table-responsive">
+                    <form action="<?php echo $this->url('cms/page'); ?>" method="post" id="list-form">
+                        <table class="table table-striped jambo_table bulk_action">
+                            <thead>
+                            <tr class="headings">
+                                <th>
+                                    <input type="checkbox" id="check-all" class="flat">
+                                </th>
+                                <th class="column-title">Tiêu đề</th>
+                                <th class="column-title">Trạng thái</th>
+                                <th class="column-title no-link last"><span class="nobr">Thao tác</span>
+                                </th>
+                                <th class="bulk-actions" colspan="7">
+                                    <a class="antoo" style="color:#fff; font-weight:500;">Đang chọn ( <span
+                                            class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                                </th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <?php foreach ($pages as $v) { ?>
+                                <tr class="even pointer">
+                                    <td class="a-center ">
+                                        <input type="checkbox" class="flat" name="table_records[]"
+                                               value="<?php echo $v['article_id']; ?>">
+                                    </td>
+                                    <td class=" "><?php echo $v['article_title']; ?></td>
+                                    <td class=" "><?php echo $status[$v['article_status']]; ?></td>
+                                    <td class=" last">
+                                        <a href="<?php echo $this->url('cms/page', ['action' => 'edit'], ['query' => ['id' => $v['article_id']]]); ?>">Cập
+                                            nhật</a> | <a
+                                            href="<?php echo $this->url('cms/page', ['action' => 'delete'], ['query' => ['id' => $v['article_id']]]); ?>">Xóa</a>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+                <div class="col-sm-12">
+                    <?php echo $this->paginationControl($pages, 'sliding', 'cms/partial/paginator', array('url' => $this->url('cms/page'))); ?>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php $this->inlineScript()->captureStart(); ?>
+function deleteRecord() {
+$('#list-form').attr('action', '<?php echo $this->url('cms/page', ['action' => 'delete']); ?>');
+$('#list-form').submit();
+}
+
+function setStatusRecord(status) {
+$('#list-form').attr('action', '<?php echo $this->url('cms/page', ['action' => 'update-status-record']); ?>?status=' + status);
+$('#list-form').submit();
+}
+<?php $this->inlineScript()->captureEnd(); ?>

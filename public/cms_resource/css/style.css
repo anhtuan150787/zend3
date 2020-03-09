@@ -1,0 +1,9 @@
+.login_form ul.help-block, ul.error-message {
+    padding-left: 0;
+    margin-left: 0;
+}
+
+.login_form ul.help-block li, ul.error-message li {
+    list-style-type: none;
+    text-align: left;
+}

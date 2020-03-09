@@ -1,0 +1,50 @@
+<?php if ($this->pageCount): ?>
+    <div class="dataTables_paginate paging_simple_numbers">
+        <ul class="pagination">
+            <!-- Previous page link -->
+            <?php if (isset($this->previous)): ?>
+                <li class="paginate_button previous">
+                    <a href="<?php echo $this->url; ?>?page=<?php echo $this->previous; ?>">
+                        &laquo;
+                    </a>
+                </li>
+            <?php else: ?>
+                <li class="paginate_button previous disabled">
+                    <a href="#">
+                        &laquo;
+                    </a>
+                </li>
+            <?php endif; ?>
+
+            <!-- Numbered page links -->
+            <?php foreach ($this->pagesInRange as $page): ?>
+                <?php if ($page != $this->current): ?>
+                    <li class="paginate_button">
+                        <a href="<?php echo $this->url;?>?page=<?php echo $page; ?>">
+                            <?php echo $page; ?>
+                        </a>
+                    </li>
+                <?php else: ?>
+                    <li class="paginate_button active">
+                        <a href="#"><?php echo $page; ?></a>
+                    </li>
+                <?php endif; ?>
+            <?php endforeach; ?>
+
+            <!-- Next page link -->
+            <?php if (isset($this->next)): ?>
+                <li class="paginate_button next">
+                    <a href="<?php echo $this->url; ?>?page=<?php echo $this->next; ?>">
+                        &raquo;
+                    </a>
+                </li>
+            <?php else: ?>
+                <li class="paginate_button next disabled">
+                    <a href="#">
+                        &raquo;
+                    </a>
+                </li>
+            <?php endif; ?>
+        </ul>
+    </div>
+<?php endif; ?>
